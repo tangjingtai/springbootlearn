@@ -1,0 +1,38 @@
+
+spring:
+  profiles:
+    active: dev
+
+server:
+  port: 8090
+
+person:
+  lastName: tangjingtai
+  age: 29
+  boss: true
+  maps:
+    k1: 1
+    k2: hello
+  list:
+   - 1
+   - 2
+   - 3
+  dog:
+    name: dog
+    age: 2
+  birth: 1990/10/04
+  email: a253210810@qq.com
+
+
+---
+spring:
+  profiles: dev
+server:
+  port: 8091
+
+
+---
+spring:
+  profiles: prod
+server:
+  port: 80
