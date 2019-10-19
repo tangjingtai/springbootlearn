@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>success</title>
+</head>
+<body>
+<h1>成功</h1>
+<h1 th:text="${name}"></h1>
+<h1 >年龄：[[${age}]]</h1>
+
+<hr/>
+<h1>转义：[[${content}]]</h1>
+<h1>非转义：[(${content})]</h1>
+</body>
+</html>

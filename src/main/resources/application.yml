@@ -44,9 +44,11 @@ person:
 ---
 spring:
   profiles: dev
+  thymeleaf:
+    cache: false
+
 server:
   port: 8091
-
 
 ---
 spring:
