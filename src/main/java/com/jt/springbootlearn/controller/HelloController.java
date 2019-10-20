@@ -1,5 +1,6 @@
 package com.jt.springbootlearn.controller;
 
+import com.jt.springbootlearn.exception.UserNotExistException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class HelloController {
 
     @PostMapping("/user/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password")String password,
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password,
                         Map<String, Object> map, HttpSession session) {
         if (username.equals("admin") && password.equals("123456")) {
             session.setAttribute("loginUser", username);
@@ -23,14 +24,21 @@ public class HelloController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(){
+    public String dashboard() {
         return "dashboard";
     }
 
     @ResponseBody
     @RequestMapping("/hello")
-    public String hello() {
+    public String hello(@RequestParam(value = "user", required = false) String user) {
+        if (user != null && user.equals("made")) {
+            throw new UserNotExistException();
+        }
         return "Hello world";
+    }
+
+    private void a() throws Exception {
+        throw new Exception();
     }
 
     @Value("${person.last-name}")
