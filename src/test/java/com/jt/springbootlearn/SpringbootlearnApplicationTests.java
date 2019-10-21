@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
+
 /**
  * SpringBoot 单元测试
  */
@@ -49,6 +52,15 @@ public class SpringbootlearnApplicationTests {
         logger.info("这是info日志...");
         logger.warn("这是warn日志...");
         logger.error("这是error日志...");
+    }
+
+    @Autowired
+    DataSource dataSource;
+
+    @Test
+    public void testJDBC() throws SQLException {
+        System.out.println("data source class:"+dataSource.getClass());
+        System.out.println("connection:"+dataSource.getConnection());
     }
 
 }
