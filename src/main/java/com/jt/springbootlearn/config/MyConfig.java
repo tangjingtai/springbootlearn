@@ -1,11 +1,12 @@
 package com.jt.springbootlearn.config;
 
-import com.jt.springbootlearn.component.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+//@EnableWebMvc // 加上这个注解，则完全接管SpringMVC
 @Configuration
 public class MyConfig extends WebMvcConfigurerAdapter {
     /**
