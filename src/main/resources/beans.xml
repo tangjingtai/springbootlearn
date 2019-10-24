@@ -4,4 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="helloService" class="com.jt.springbootlearn.service.HelloService"></bean>
+
+    <bean id="person2" class="com.jt.springbootlearn.bean.Person">
+        <property name="lastName" value="大爷"></property>
+        <property name="age" value="80"></property>
+    </bean>
 </beans>

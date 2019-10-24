@@ -1,14 +1,20 @@
 package com.jt.springbootlearn;
 
+import com.jt.springbootlearn.bean.Dessert;
+import com.jt.springbootlearn.bean.Dog;
 import com.jt.springbootlearn.bean.Person;
+import com.jt.springbootlearn.config.BenaConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
@@ -63,4 +69,33 @@ public class SpringbootlearnApplicationTests {
         System.out.println("connection:"+dataSource.getConnection());
     }
 
+    @Test
+    public void testXMLConfigure(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:beans.xml");
+        Person person2 = (Person) applicationContext.getBean("person2");
+        System.out.println(person2);
+
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(BenaConfig.class);
+        Person person = annotationConfigApplicationContext.getBean(Person.class);
+        System.out.println(person);
+    }
+
+    @Autowired
+//    @Qualifier("fruity")
+    private Dessert dessert;
+
+    @Test
+    public void testQualifire(){
+        System.out.println(dessert.getClass());
+    }
+
+    @Test
+    public void testSingleton(){
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(BenaConfig.class);
+        Dog dog = annotationConfigApplicationContext.getBean(Dog.class);
+        System.out.println(dog);
+
+        Person person = annotationConfigApplicationContext.getBean(Person.class);
+        System.out.println(person);
+    }
 }
