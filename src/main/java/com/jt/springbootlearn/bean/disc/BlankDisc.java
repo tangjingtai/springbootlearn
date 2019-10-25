@@ -1,4 +1,4 @@
-package com.jt.springbootlearn.bean.concert;
+package com.jt.springbootlearn.bean.disc;
 
 import java.util.List;
 

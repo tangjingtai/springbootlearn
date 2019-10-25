@@ -2,9 +2,11 @@ package com.jt.springbootlearn;
 
 import com.jt.springbootlearn.bean.Dessert;
 import com.jt.springbootlearn.bean.Dog;
+import com.jt.springbootlearn.bean.Foo;
 import com.jt.springbootlearn.bean.Person;
 import com.jt.springbootlearn.bean.concert.*;
-import com.jt.springbootlearn.config.AOPConfig;
+import com.jt.springbootlearn.bean.disc.CompactDisc;
+import com.jt.springbootlearn.bean.disc.TrackCounter;
 import com.jt.springbootlearn.config.BenaConfig;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,13 +14,10 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,7 +28,6 @@ import java.sql.SQLException;
  * SpringBoot 单元测试
  */
 @RunWith(SpringRunner.class)
-//@Import(AOPConfig.class)
 @ComponentScan
 @SpringBootTest
 public class SpringbootlearnApplicationTests {
@@ -52,7 +50,7 @@ public class SpringbootlearnApplicationTests {
     }
 
     //记录器
-    Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Test
     public void testLogging() {
@@ -72,12 +70,12 @@ public class SpringbootlearnApplicationTests {
 
     @Test
     public void testJDBC() throws SQLException {
-        System.out.println("data source class:"+dataSource.getClass());
-        System.out.println("connection:"+dataSource.getConnection());
+        System.out.println("data source class:" + dataSource.getClass());
+        System.out.println("connection:" + dataSource.getConnection());
     }
 
     @Test
-    public void testXMLConfigure(){
+    public void testXMLConfigure() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:beans.xml");
         Person person2 = (Person) applicationContext.getBean("person2");
         System.out.println(person2);
@@ -92,12 +90,12 @@ public class SpringbootlearnApplicationTests {
     private Dessert dessert;
 
     @Test
-    public void testQualifire(){
+    public void testQualifire() {
         System.out.println(dessert.getClass());
     }
 
     @Test
-    public void testSingleton(){
+    public void testSingleton() {
         AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(BenaConfig.class);
         Dog dog = annotationConfigApplicationContext.getBean(Dog.class);
         System.out.println(dog);
@@ -119,7 +117,7 @@ public class SpringbootlearnApplicationTests {
     TrackCounter trackCounter;
 
     @Test
-    public void testAOP(){
+    public void testAOP() {
         performance.perform();
 
         disc.playTrack(2);
@@ -135,6 +133,33 @@ public class SpringbootlearnApplicationTests {
         Assert.assertEquals(2, trackCounter.getTrackCount(1));
         Assert.assertEquals(3, trackCounter.getTrackCount(2));
         Assert.assertEquals(1, trackCounter.getTrackCount(3));
+    }
+
+    @Autowired
+    CriticAspect criticAspect;
+
+    @Test
+    public void testAspectJ() {
+        performance.perform();
+        System.out.println("performance class: " + performance.getClass());
+        System.out.println("criticAspect class: " + criticAspect.getClass());
+        System.out.println("CriticismEngine class: " + criticAspect.getCriticismEngine().getClass());
+
+        Performance performance2 = new LiudehuaConcert();
+        System.out.println("performances2 class: " + performance2.getClass());
+
+        Foo foo = new Foo();
+        System.out.println("foo class: " + foo.getClass());
+
+    }
+
+    @Test
+    public void testInjectNewInterface() {
+        performance.perform();
+        if (performance instanceof Encoreable) {
+            System.out.println("执行新增功能");
+            ((Encoreable) performance).performancore();
+        }
     }
 
 }

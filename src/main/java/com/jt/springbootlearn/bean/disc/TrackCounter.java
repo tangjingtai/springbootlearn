@@ -1,4 +1,4 @@
-package com.jt.springbootlearn.bean.concert;
+package com.jt.springbootlearn.bean.disc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,6 @@ public class TrackCounter {
     }
 
     public int getTrackCount(int trackNumber) {
-        return trackCounts.containsKey(trackNumber) ? trackCounts.get(trackNumber) : 0;
+        return trackCounts.getOrDefault(trackNumber, 0);
     }
 }

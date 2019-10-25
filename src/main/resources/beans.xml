@@ -10,11 +10,11 @@
     <!--<bean id="helloService" class="com.jt.springbootlearn.service.HelloService"></bean>-->
 
     <bean id="person2" class="com.jt.springbootlearn.bean.Person">
-        <property name="lastName" value="大爷"></property>
-        <property name="age" value="80"></property>
+        <property name="lastName" value="大爷"/>
+        <property name="age" value="80"/>
     </bean>
 
-    <bean id="blankDisc" class="com.jt.springbootlearn.bean.concert.BlankDisc">
+    <bean id="blankDisc" class="com.jt.springbootlearn.bean.disc.BlankDisc">
         <property name="title" value="this is Album" />
         <property name="artist" value="刘德华" />
         <property name="tracks">
@@ -27,7 +27,7 @@
         </property>
     </bean>
 
-    <bean id="trackCounter" class="com.jt.springbootlearn.bean.concert.TrackCounter"></bean>
+    <bean id="trackCounter" class="com.jt.springbootlearn.bean.disc.TrackCounter"/>
 
     <bean id="criticismEngineImpl" class="com.jt.springbootlearn.bean.concert.CriticismEngineImpl">
         <property name="criticismPool">
@@ -40,9 +40,13 @@
         </property>
     </bean>
 
+    <bean class="com.jt.springbootlearn.bean.concert.CriticAspect" factory-method="aspectOf">
+        <property name="criticismEngine" ref="criticismEngineImpl"/>
+    </bean>
+
     <aop:config>
         <aop:aspect ref="trackCounter">
-            <aop:pointcut id="trackPlayed" expression="execution(* com.jt.springbootlearn.bean.concert.CompactDisc.playTrack(int)) and args(trackNumber)" />
+            <aop:pointcut id="trackPlayed" expression="execution(* com.jt.springbootlearn.bean.disc.CompactDisc.playTrack(int)) and args(trackNumber)" />
             <aop:before pointcut-ref="trackPlayed" method="countTracker"/>
         </aop:aspect>
     </aop:config>
