@@ -3,7 +3,10 @@ package com.jt.springbootlearn;
 import com.jt.springbootlearn.bean.Dessert;
 import com.jt.springbootlearn.bean.Dog;
 import com.jt.springbootlearn.bean.Person;
+import com.jt.springbootlearn.bean.concert.*;
+import com.jt.springbootlearn.config.AOPConfig;
 import com.jt.springbootlearn.config.BenaConfig;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -13,6 +16,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,6 +29,8 @@ import java.sql.SQLException;
  * SpringBoot 单元测试
  */
 @RunWith(SpringRunner.class)
+//@Import(AOPConfig.class)
+@ComponentScan
 @SpringBootTest
 public class SpringbootlearnApplicationTests {
 
@@ -98,4 +105,36 @@ public class SpringbootlearnApplicationTests {
         Person person = annotationConfigApplicationContext.getBean(Person.class);
         System.out.println(person);
     }
+
+    @Autowired
+    Performance performance;
+
+    @Autowired
+    Audience audience;
+
+    @Autowired
+    CompactDisc disc;
+
+    @Autowired
+    TrackCounter trackCounter;
+
+    @Test
+    public void testAOP(){
+        performance.perform();
+
+        disc.playTrack(2);
+        disc.playTrack(3);
+        disc.playTrack(1);
+        disc.playTrack(0);
+        disc.playTrack(2);
+        disc.playTrack(0);
+        disc.playTrack(2);
+        disc.playTrack(1);
+
+        Assert.assertEquals(2, trackCounter.getTrackCount(0));
+        Assert.assertEquals(2, trackCounter.getTrackCount(1));
+        Assert.assertEquals(3, trackCounter.getTrackCount(2));
+        Assert.assertEquals(1, trackCounter.getTrackCount(3));
+    }
+
 }

@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/aop
+                          http://www.springframework.org/schema/aop/spring-aop.xsd
+    ">
 
-    <bean id="helloService" class="com.jt.springbootlearn.service.HelloService"></bean>
+    <!--<bean id="helloService" class="com.jt.springbootlearn.service.HelloService"></bean>-->
 
     <bean id="person2" class="com.jt.springbootlearn.bean.Person">
         <property name="lastName" value="大爷"></property>
         <property name="age" value="80"></property>
     </bean>
+
+    <bean id="blankDisc" class="com.jt.springbootlearn.bean.concert.BlankDisc">
+        <property name="title" value="this is Album" />
+        <property name="artist" value="刘德华" />
+        <property name="tracks">
+            <list>
+                <value>中国人</value>
+                <value>忘情水</value>
+                <value>练习</value>
+                <value>冰雨</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trackCounter" class="com.jt.springbootlearn.bean.concert.TrackCounter"></bean>
+
+    <bean id="criticismEngineImpl" class="com.jt.springbootlearn.bean.concert.CriticismEngineImpl">
+        <property name="criticismPool">
+            <array>
+                <value>这个垃圾表演</value>
+                <value>一般般吧</value>
+                <value>尬演</value>
+                <value>观众刚开始就要离场了</value>
+            </array>
+        </property>
+    </bean>
+
+    <aop:config>
+        <aop:aspect ref="trackCounter">
+            <aop:pointcut id="trackPlayed" expression="execution(* com.jt.springbootlearn.bean.concert.CompactDisc.playTrack(int)) and args(trackNumber)" />
+            <aop:before pointcut-ref="trackPlayed" method="countTracker"/>
+        </aop:aspect>
+    </aop:config>
+
 </beans>
