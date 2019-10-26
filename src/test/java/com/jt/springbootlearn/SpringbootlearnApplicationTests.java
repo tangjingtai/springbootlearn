@@ -8,6 +8,8 @@ import com.jt.springbootlearn.bean.concert.*;
 import com.jt.springbootlearn.bean.disc.CompactDisc;
 import com.jt.springbootlearn.bean.disc.TrackCounter;
 import com.jt.springbootlearn.config.BenaConfig;
+import com.jt.springbootlearn.config.SpringUtil;
+import com.jt.springbootlearn.jdbc.DogRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,13 +24,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
  * SpringBoot 单元测试
  */
 @RunWith(SpringRunner.class)
-@ComponentScan
+@ComponentScan()
 @SpringBootTest
 public class SpringbootlearnApplicationTests {
 
@@ -150,7 +154,6 @@ public class SpringbootlearnApplicationTests {
 
         Foo foo = new Foo();
         System.out.println("foo class: " + foo.getClass());
-
     }
 
     @Test
@@ -160,6 +163,16 @@ public class SpringbootlearnApplicationTests {
             System.out.println("执行新增功能");
             ((Encoreable) performance).performancore();
         }
+    }
+
+    @Autowired
+    SpringUtil springUtil;
+
+    @Test
+    public void testJDBCQuery(){
+        DogRepository dogRepository = springUtil.getBean(DogRepository.class);
+        Dog dog = dogRepository.getDogById(1);
+        System.out.println(dog);
     }
 
 }
