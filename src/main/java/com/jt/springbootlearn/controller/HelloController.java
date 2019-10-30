@@ -1,5 +1,6 @@
 package com.jt.springbootlearn.controller;
 
+import com.jt.springbootlearn.bean.Person;
 import com.jt.springbootlearn.exception.UserNotExistException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-@Controller
+@RestController
 public class HelloController {
 
     @PostMapping("/user/login")
@@ -34,6 +35,18 @@ public class HelloController {
             throw new UserNotExistException();
         }
         return "Hello world";
+    }
+
+    @GetMapping("/user/{id}")
+    public Person person(@PathVariable("id") Long id){
+        if(id == 1L){
+            Person person = new Person();
+            person.setLastName("一号用户");
+            person.setAge(29);
+            person.setBoss(true);
+            return person;
+        }
+        throw new UserNotExistException();
     }
 
     private void a() throws Exception {

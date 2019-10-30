@@ -1,9 +1,11 @@
 package com.jt.springbootlearn.controller;
 
 import com.jt.springbootlearn.exception.UserNotExistException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,7 @@ import java.util.Map;
 @ControllerAdvice
 public class MyExceptionHanlder {
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     @ExceptionHandler(UserNotExistException.class)
     public Map<String, Object> handleException(Exception ex){
