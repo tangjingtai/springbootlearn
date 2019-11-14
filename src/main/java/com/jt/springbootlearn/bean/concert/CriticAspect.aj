@@ -4,11 +4,11 @@ public aspect CriticAspect {
     public CriticAspect() {
     }
 
-    pointcut performance():execution(* perform(..));
-
-    after() returning():performance(){
-        System.out.println(criticismEngine.getCriticism());
-    }
+//    pointcut performance():execution(* perform(..));
+//
+//    after() returning():performance(){
+//        System.out.println(criticismEngine.getCriticism());
+//    }
 
     private CriticismEngine criticismEngine;
 

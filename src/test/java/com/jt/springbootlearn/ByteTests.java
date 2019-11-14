@@ -115,6 +115,9 @@ public class ByteTests {
         @JsonProperty("IsCurKnowledge")
         private Boolean isCurKnowledge;
 
+        @JsonProperty("ScoreRate")
+        private Double scoreRate;
+
         public Integer getKnowledgeId() {
             return knowledgeId;
         }
@@ -137,6 +140,14 @@ public class ByteTests {
 
         public void setCurKnowledge(Boolean curKnowledge) {
             isCurKnowledge = curKnowledge;
+        }
+
+        public Double getScoreRate() {
+            return scoreRate;
+        }
+
+        public void setScoreRate(Double scoreRate) {
+            this.scoreRate = scoreRate;
         }
     }
 }
