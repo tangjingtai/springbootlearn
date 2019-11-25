@@ -89,6 +89,7 @@ public class JDBCTests {
             closeStatement(stmt);
             closeConnection(conn);
         }
+
     }
 
     private Connection getMySqlConnection() {

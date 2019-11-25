@@ -1,5 +1,6 @@
 package com.jt.springbootlearn.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +25,7 @@ public class Person {
     private Date birth;
     private Boolean boss;
     private Map<String, Object> maps;
+    private Dog dog;
 
     @Override
     public String toString() {
@@ -52,11 +54,10 @@ public class Person {
         return dog;
     }
 
+    @Autowired
     public void setDog(Dog dog) {
         this.dog = dog;
     }
-
-    private Dog dog;
 
     public String getLastName() {
         return lastName;

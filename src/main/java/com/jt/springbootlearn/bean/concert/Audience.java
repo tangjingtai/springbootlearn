@@ -31,7 +31,7 @@ public class Audience {
         System.out.println("Demand refund.");
     }
 
-    @Around("perform()")
+    @Around("perform()" )
     public void watchPerformance(ProceedingJoinPoint joinPoint){
         System.out.println("watchPerformance...");
         try{

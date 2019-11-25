@@ -23,6 +23,9 @@ public class ReflectTests {
         for (Class<?> interf : interfaces){
             System.out.println(interf);
         }
+
+        Class<?>[] declaredClasses = fooClass.getDeclaredClasses();
+        int length = declaredClasses.length;
     }
 
     @Test

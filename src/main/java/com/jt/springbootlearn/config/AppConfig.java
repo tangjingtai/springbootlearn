@@ -3,6 +3,7 @@ package com.jt.springbootlearn.config;
 import com.jt.springbootlearn.service.HelloService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * @Configuration 表示当前类为一个配置类
@@ -15,6 +16,7 @@ public class AppConfig {
      * @return
      */
     @Bean
+    @DependsOn()
     public HelloService helloService(){
         System.out.println("配置类@Bean给容器中添加了组件");
         return new HelloService();

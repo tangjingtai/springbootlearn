@@ -24,8 +24,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
-import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -173,6 +171,19 @@ public class SpringbootlearnApplicationTests {
         DogRepository dogRepository = springUtil.getBean(DogRepository.class);
         Dog dog = dogRepository.getDogById(1);
         System.out.println(dog);
+//        ThreadLocal<String> stringThreadLocal;
+        
+    }
+
+    @Test
+    public void testFabonacci(){
+        System.out.println("fibonacci(10) = " + fibonacci(10));
+    }
+
+    private long fibonacci(int index){
+        if(index<=2)
+            return  1;
+        return fibonacci(index -1) + fibonacci(index-2);
     }
 
 }

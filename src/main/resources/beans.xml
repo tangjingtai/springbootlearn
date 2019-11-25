@@ -9,9 +9,14 @@
 
     <!--<bean id="helloService" class="com.jt.springbootlearn.service.HelloService"></bean>-->
 
-    <bean id="person2" class="com.jt.springbootlearn.bean.Person">
+    <bean id="person2" scope="singleton" class="com.jt.springbootlearn.bean.Person">
         <property name="lastName" value="大爷"/>
         <property name="age" value="80"/>
+        <property name="dog" ref="dog2"/>
+    </bean>
+
+    <bean id="dog2" scope="singleton" class="com.jt.springbootlearn.bean.Dog">
+        <property name="age" value="3"/>
     </bean>
 
     <bean id="blankDisc" class="com.jt.springbootlearn.bean.disc.BlankDisc">

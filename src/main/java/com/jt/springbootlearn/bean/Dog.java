@@ -1,5 +1,6 @@
 package com.jt.springbootlearn.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,4 +31,5 @@ public class Dog {
     public void setAge(Integer age) {
         this.age = age;
     }
+
 }
