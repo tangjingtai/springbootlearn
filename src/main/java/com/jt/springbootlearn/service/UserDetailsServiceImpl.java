@@ -4,10 +4,12 @@ import com.jt.springbootlearn.entities.SecurityUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
     /**
      * Locates the user based on the username. In the actual implementation, the search
@@ -25,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SecurityUser user = new SecurityUser();
         user.setUsername("admin");
-        user.setPassword("123456");
+        user.setPassword("ByRLQB4UgwUJuxRFPLCIYWBE6rbRKK4Poj4K+w==");
         user.setEnabled(true);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);

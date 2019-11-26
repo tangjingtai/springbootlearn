@@ -54,5 +54,7 @@ public class AuthTokenFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         //TODO: 从请求中读取用户信息
+        System.out.println("AuthTokenFilter...doFilter...");
+        chain.doFilter(request, response);
     }
 }
