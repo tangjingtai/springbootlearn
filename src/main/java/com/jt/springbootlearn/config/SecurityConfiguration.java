@@ -50,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().requireCsrfProtectionMatcher(new CsrfSecurityRequestMatcher())  // 自定义是否需要csrf检查的匹配规则
                 .and().authorizeRequests()
                 .antMatchers("/authenticate","/login","/webjars/**", "/asserts/**" ).permitAll()
+                .antMatchers("/sendFanoutMessage" ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
